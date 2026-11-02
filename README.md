@@ -46,8 +46,6 @@ Para detener el servidor, usar `Ctrl+C` en su terminal.
 
 ## Diagrama del sistema
 
-![Diagrama del sistema](/capturas/diagrama_sistema.jpg)
-
 ```mermaid
 graph TD
     subgraph Clientes
