@@ -125,13 +125,27 @@ distribución de tareas entre workers.
 
 ## Capturas de pantalla
 
-Las capturas de las pruebas están en la carpeta `Capturas/`:
-
-| Archivo                     | Qué muestra                                                     |
-|-----------------------------|-----------------------------------------------------------------|
-| `servidor-inicio.jpg`       | Servidor iniciado con el pool de workers listo                  |
-| `cliente-varias-tareas.jpg` | Cliente enviando varias tareas y recibiendo los resultados      |
-| `servidor-paralelismo.jpg`  | Servidor repartiendo las tareas entre los 3 workers en paralelo |
+### Servidor iniciado
+ 
+El servidor arranca, crea el pool de 3 workers y queda escuchando en
+`localhost:5000`.
+ 
+![Servidor iniciado](capturas/servidor-inicio.jpg)
+ 
+### Cliente enviando varias tareas
+ 
+El cliente envía varios números a la vez. Cada tarea vuelve con su resultado
+(el cuadrado del número) y el worker que la procesó.
+ 
+![Cliente enviando varias tareas](capturas/cliente-varias-tareas.jpg)
+ 
+### Procesamiento en paralelo
+ 
+En el servidor se ve cómo las tareas se encolan y los 3 workers las procesan en
+paralelo: las primeras tres al mismo tiempo, y las demás esperan a que se libere
+un worker.
+ 
+![Procesamiento en paralelo](capturas/servidor-paralelismo.jpg)
 
 
 ---
