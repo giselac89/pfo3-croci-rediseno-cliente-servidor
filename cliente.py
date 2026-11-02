@@ -13,7 +13,7 @@ def enviar_tarea(numero):
     s.close()
 
 if __name__ == "__main__":
-    entrada = input("Ingresá varios números separados por espacio: ")
+    entrada = input("Para calcular el cuadrado de los números, ingresalos separados por espacio: ")
     numeros = entrada.split()                
 
     hilos = []
@@ -25,4 +25,4 @@ if __name__ == "__main__":
     for t in hilos:
         t.join()                             
 
-    print("Todas las tareas completadas")
+    print("Todas las tareas fueron completadas")
