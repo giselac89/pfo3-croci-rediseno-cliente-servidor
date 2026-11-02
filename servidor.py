@@ -12,20 +12,22 @@ cola = queue.Queue()
 # --- Worker: saca tareas de la cola y las procesa ---
 def worker(nombre):
     while True:
-        conexion, direccion, tarea = cola.get()
-        print(f"[{nombre}] procesando tarea: {tarea}")
-        time.sleep(2)                                  
+        conexion, direccion, tarea = cola.get()                          
 
         try:
-            numero = int(tarea)
-            resultado = numero * numero                
-            respuesta = f"Resultado: {resultado} (procesado por {nombre})"
+            num_tarea, valor = tarea.split(":")        # separa "1:5" en num_tarea="1", valor="5"
+            numero = int(valor)
+            print(f"[{nombre}] procesando Tarea {num_tarea}: {numero}^2")
+            time.sleep(2)                              # simula trabajo pesado
+            resultado = numero * numero
+            respuesta = f"Tarea {num_tarea}: {numero}^2 = {resultado} (procesado por {nombre})"
+            print(f"[{nombre}] terminó Tarea {num_tarea}: {numero}^2 = {resultado}")
         except ValueError:
             respuesta = "Error: enviá un número válido"
+            print(f"[{nombre}] tarea inválida: {tarea}")
 
         conexion.send(respuesta.encode())              
         conexion.close()                               
-        print(f"[{nombre}] terminó tarea: {tarea}")
         cola.task_done()
 
 
@@ -52,7 +54,7 @@ def main():
 
                 tarea = conexion.recv(1024).decode()
                 cola.put((conexion, direccion, tarea))
-                print(f"[Servidor] tarea de {direccion[1]} encolada: {tarea}")
+                print(f"[Servidor] {tarea} encolada")
         except KeyboardInterrupt:
             print("Servidor detenido.")
 
